@@ -20,19 +20,25 @@ export function Home() {
   }
 
   function handleToggleTaskDone(id: number) {
-    console.log("done " + id);
-    // let updatedTasks: Task[] = [...tasks];
-    // updatedTasks[id].done
-    //   ? (updatedTasks[id].done = false)
-    //   : (updatedTasks[id].done = true);
+    //copia
+    const copiaTasks = tasks.map((task) => ({ ...task }));
 
-    // setTasks(updatedTasks);
+    //buscar item
+    const newTask = copiaTasks.find((task) => task.id === id);
+
+    // modificacao
+    if (!newTask) return;
+
+    newTask.done = !newTask.done;
+
+    setTasks(copiaTasks);
+
     //TODO - toggle task done if exists
   }
 
   function handleRemoveTask(id: number) {
     const newList: Task[] = tasks.filter((task) => task.id !== id);
-    setTasks(newList); 
+    setTasks(newList);
     //TODO - remove task from state
   }
 
