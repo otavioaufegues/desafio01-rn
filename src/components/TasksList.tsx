@@ -45,7 +45,7 @@ export function TasksList({
                 testID={`button-${index}`}
                 activeOpacity={0.7}
                 style={styles.taskButton}
-                onPress={() => toggleTaskDone(index)}
+                onPress={() => toggleTaskDone(item.id)}
                 //TODO - use onPress (toggle task) prop
               >
                 <View
@@ -68,7 +68,7 @@ export function TasksList({
             <TouchableOpacity
               testID={`trash-${index}`}
               style={{ paddingHorizontal: 24 }}
-              onPress={() => removeTask(index)}
+              onPress={() => removeTask(item.id)}
               //TODO - use onPress (remove task) prop
             >
               <Image source={trashIcon} />
