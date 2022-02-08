@@ -21,18 +21,18 @@ export function Home() {
 
   function handleToggleTaskDone(id: number) {
     let updatedTasks: Task[] = [...tasks];
-    
-    
+
     updatedTasks[id].done
-    ? (updatedTasks[id].done = false)
-    : (updatedTasks[id].done = true);
-    
+      ? (updatedTasks[id].done = false)
+      : (updatedTasks[id].done = true);
+
     setTasks(updatedTasks);
     //TODO - toggle task done if exists
   }
 
   function handleRemoveTask(id: number) {
-    setTasks(tasks.filter((task) => task.id !== id));
+    const newList: Task[] = tasks.filter((task) => tasks.indexOf(task) !== id);
+    setTasks(newList);
     //TODO - remove task from state
   }
 
