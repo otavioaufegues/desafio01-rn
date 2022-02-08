@@ -20,14 +20,13 @@ export function Home() {
   }
 
   function handleToggleTaskDone(id: number) {
-    console.log("oi");
     let updatedTasks: Task[] = [...tasks];
-
+    
     
     updatedTasks[id].done
-      ? (updatedTasks[id].done = false)
-      : (updatedTasks[id].done = true);
-
+    ? (updatedTasks[id].done = false)
+    : (updatedTasks[id].done = true);
+    
     setTasks(updatedTasks);
     //TODO - toggle task done if exists
   }
