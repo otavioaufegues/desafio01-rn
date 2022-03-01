@@ -5,6 +5,11 @@ import { Header } from "../components/Header";
 import { Task, TasksList } from "../components/TasksList";
 import { TodoInput } from "../components/TodoInput";
 
+export type EditTaskArgs = {
+  taskId: number;
+  taskNewTitle: string;
+};
+
 export function Home() {
   const [tasks, setTasks] = useState<Task[]>([]);
 
@@ -12,8 +17,10 @@ export function Home() {
     const newTask = tasks.find((task) => task.title === newTaskTitle);
 
     if (newTask) {
-      Alert.alert("Tarefa já existe!");
-      return;
+      return Alert.alert(
+        "Tarefa já existe!",
+        "Você não pode cadastrar uma task com o mesmo nome"
+      );
     }
 
     const task: Task = {
@@ -50,9 +57,6 @@ export function Home() {
       [
         {
           text: "Não",
-          onPress: () => {
-            return;
-          },
         },
         {
           text: "Sim",
@@ -67,12 +71,12 @@ export function Home() {
     //TODO - remove task from state
   }
 
-  function handleEditTask(id: number, taskNewTitle: string) {
+  function handleEditTask({ taskId, taskNewTitle }: EditTaskArgs) {
     //copia
     const copiaTasks = tasks.map((task) => ({ ...task }));
 
     //buscar item
-    const newTask = copiaTasks.find((task) => task.id === id);
+    const newTask = copiaTasks.find((task) => task.id === taskId);
 
     // modificacao
     if (!newTask) return;
@@ -80,7 +84,6 @@ export function Home() {
     newTask.title = taskNewTitle;
 
     setTasks(copiaTasks);
-
   }
 
   return (
@@ -93,6 +96,7 @@ export function Home() {
         tasks={tasks}
         toggleTaskDone={handleToggleTaskDone}
         removeTask={handleRemoveTask}
+        editTask={handleEditTask}
       />
     </View>
   );
